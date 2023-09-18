@@ -115,33 +115,29 @@ goal_state = 6
 LEFT, RIGHT = range(2)
 P
 init_state
-
 state, reward, done, info = env.step(RIGHT)
 print("state:{0} - reward:{1} - done:{2} - info:{3}".format(state, reward, done, info))
-
-## First Policy
+# First Policy
 pi_1 = lambda s: {
     0:LEFT, 1:LEFT, 2:LEFT, 3:LEFT, 4:LEFT, 5:LEFT, 6:LEFT
 }[s]
 print_policy(pi_1, P, action_symbols=('<', '>'), n_cols=7)
-## Find the probability of success and the mean return of the first policy
+# Find the probability of success and the mean return of the first policy
 print('Reaches goal {:.2f}%. Obtains an average undiscounted return of {:.4f}.'.format(
     probability_success(env, pi_1, goal_state=goal_state)*100,
     mean_return(env, pi_1)))
-
-## Create your own policy
+# Create your own policy
+# Write your code here
 pi_2 = lambda s: {
-    0:LEFT, 1:RIGHT, 2:RIGHT, 3:LEFT, 4:LEFT, 5:RIGHT, 6:LEFT
+    0:LEFT, 1:RIGHT, 2:RIGHT, 3:LEFT, 4:RIGHT, 5:RIGHT, 6:LEFT
 }[s]
 print_policy(pi_2, P, action_symbols=('<', '>'), n_cols=7)
-## Find the probability of success and the mean return of you your policy
+# Find the probability of success and the mean return of the own policy
 print('Reaches goal {:.2f}%. Obtains an average undiscounted return of {:.4f}.'.format(
     probability_success(env, pi_2, goal_state=goal_state)*100,
     mean_return(env, pi_2)))
-
-## Compare your policy with the first policy
-
-### The implementation of first code has resulted in success rate of 3% while the second policy has resulted in improving the result of reaching the goal. The success rate for second policy is 39%.
+# Compare your policy with the first policy
+#Policy Second have high Probability of success compared to first Policy
 ```
 
 ## Policy Evaluation:
@@ -150,26 +146,23 @@ def policy_evaluation(pi, P, gamma=1.0, theta=1e-10):
     prev_V = np.zeros(len(P), dtype=np.float64)
     # Write your code here to evaluate the given policy
     while True:
-      V = np.zeros(len(P))
-      for s in range(len(P)):
-        for prob, next_state, reward, done in P[s][pi(s)]:
-          V[s] += prob * (reward + gamma *  prev_V[next_state] * (not done))
-      if np.max(np.abs(prev_V - V)) < theta:
-        break
-      prev_V = V.copy()
+         V = np. zeros (len (P))
+         for s in range (len (P)):
+           for prob, next_state, reward, done in P[s] [pi (s)]:
+            V[s] +=prob * (reward + gamma *  prev_V[next_state] * (not done))
+         if np.max(np.abs (prev_V - V)) < theta:
+            break
+         prev_V =V.copy()
     return V
-
-## Code to evaluate the first policy
+# Code to evaluate the first policy
 V1 = policy_evaluation(pi_1, P)
 print_state_value_function(V1, P, n_cols=7, prec=5)
-
-## Code to evaluate the second policy
+# Code to evaluate the second policy
+# Write your code here
 V2 = policy_evaluation(pi_2, P)
 print_state_value_function(V2, P, n_cols=7, prec=5)
-
-## Comparing policies based on state value function
-### The state value function of the second policy V2 is greater than that of the first policy V1, so we conclude that the second policy is the best policy.
-
+# Comparing the two policies
+# Compare the two policies based on the value function using the above equation and find the best policy
 V1
 print_state_value_function(V1, P, n_cols=7, prec=5)
 V2
@@ -181,6 +174,7 @@ elif(np.sum(V2>=V1)==7):
   print("The second policy is the better policy")
 else:
   print("Both policies have their merits.")
+
 ```
 
 ## OUTPUT:
@@ -192,9 +186,10 @@ else:
 
 
 ### Policy 2:
-![image](https://github.com/Aashima02/rl-policy-evaluation/assets/93427086/001480ea-e4fa-4437-b4a3-65c989218db2)
-![image](https://github.com/Aashima02/rl-policy-evaluation/assets/93427086/11260e8b-6e2a-4f0e-9c8f-5861b1603e5f)
-![image](https://github.com/Aashima02/rl-policy-evaluation/assets/93427086/52249b61-ccc8-4903-969b-67ac23fb5f36)
+![image](https://github.com/sangeethak15-AI/rl-policy-evaluation/assets/93992063/0d254e9e-4aab-4126-9cb9-935285b5bd1a)
+![image](https://github.com/sangeethak15-AI/rl-policy-evaluation/assets/93992063/b8a640a3-25dc-4a9e-808f-5dc22c6e664b)
+![image](https://github.com/sangeethak15-AI/rl-policy-evaluation/assets/93992063/f12a98f1-d26e-41dd-a4c9-f92dca77789d)
+
 
 ### Comparison:
 ![image](https://github.com/Aashima02/rl-policy-evaluation/assets/93427086/1ee6d217-5ada-4fc0-ae3d-e3701e13746a)
