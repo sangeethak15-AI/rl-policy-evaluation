@@ -50,7 +50,7 @@ import warnings
 warnings.filterwarnings('ignore', category=DeprecationWarning)
 np.set_printoptions(suppress=True)
 random.seed(123); np.random.seed(123)
-# Reference https://github.com/mimoralea/gym-walk
+
 ```
 
 ```python
